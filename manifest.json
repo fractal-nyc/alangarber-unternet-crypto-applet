@@ -1,7 +1,7 @@
 {
   "name": "Crypto Info Applet",
   "short_name": "Crypto Info",
-  "description": "Get real-time crypto prices for any token",
+  "description": "Get real-time crypto prices and DeFi insights.",
   "icons": [
     {
       "src": "icon-128x128.png"
@@ -10,17 +10,149 @@
   "entrypoint": "index.html",
   "actions": {
     "get_price": {
-      "title": "Get Coin Price by CoinGecko ID",
-      "description": "Get the current USD price for a cryptocurrency using its CoinGecko ID. You must pass the exact ID used by CoinGecko, e.g., 'bitcoin', 'ethereum', 'solana', not symbols like 'BTC' or 'ETH'. Refer to https://api.coingecko.com/api/v3/coins/list for full list.",
+      "title": "Get Coin Price",
+      "description": "Get the current USD price for a cryptocurrency by CoinGecko ID.",
       "params_schema": {
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
-            "description": "The CoinGecko ID of the cryptocurrency (e.g. 'bitcoin', 'ethereum')"
+            "description": "CoinGecko ID (e.g. 'bitcoin', 'ethereum')"
           }
         },
         "required": ["id"]
+      }
+    },
+    "get_top_gainers": {
+      "title": "Top Gainers",
+      "description": "Get the top 5 gainers by 24h price change.",
+      "params_schema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    "get_top_losers": {
+      "title": "Top Losers",
+      "description": "Get the top 5 losers by 24h price change.",
+      "params_schema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    "get_global_market_data": {
+      "title": "Global Market Data",
+      "description": "Get global cryptocurrency market stats like total market cap and volume.",
+      "params_schema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    "get_gas_fees": {
+      "title": "Ethereum Gas Fees",
+      "description": "Get current estimated Ethereum gas fees.",
+      "params_schema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    "get_protocol_tvl": {
+      "title": "DeFi Protocol TVL",
+      "description": "Get TVL data for a DeFi protocol.",
+      "params_schema": {
+        "type": "object",
+        "properties": {
+          "protocol": {
+            "type": "string",
+            "description": "DeFi Llama protocol slug (e.g. 'aave', 'curve')"
+          }
+        },
+        "required": ["protocol"]
+      }
+    },
+    "get_token_tvl": {
+      "title": "Token TVL",
+      "description": "Get total value locked for a token address.",
+      "params_schema": {
+        "type": "object",
+        "properties": {
+          "tokenAddress": {
+            "type": "string",
+            "description": "ERC20 token contract address"
+          }
+        },
+        "required": ["tokenAddress"]
+      }
+    },
+    "get_token_supply": {
+      "title": "Token Supply",
+      "description": "Get circulating supply of a token by CoinGecko ID.",
+      "params_schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "CoinGecko ID"
+          }
+        },
+        "required": ["id"]
+      }
+    },
+    "get_token_marketcap": {
+      "title": "Token Market Cap",
+      "description": "Get market capitalization of a token by CoinGecko ID.",
+      "params_schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "CoinGecko ID"
+          }
+        },
+        "required": ["id"]
+      }
+    },
+    "get_volume_traded": {
+      "title": "Token Trading Volume",
+      "description": "Get 24h trading volume of a token by CoinGecko ID.",
+      "params_schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "CoinGecko ID"
+          }
+        },
+        "required": ["id"]
+      }
+    },
+    "get_price_chart": {
+      "title": "7-Day Price Chart",
+      "description": "Get historical 7-day price chart data for a token by CoinGecko ID.",
+      "params_schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "CoinGecko ID"
+          }
+        },
+        "required": ["id"]
+      }
+    },
+    "get_latest_news": {
+      "title": "Latest Crypto News",
+      "description": "Get recent news headlines from CryptoPanic.",
+      "params_schema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    "get_trending_searches": {
+      "title": "Trending Coin Searches",
+      "description": "Get top trending coin searches from CoinGecko.",
+      "params_schema": {
+        "type": "object",
+        "properties": {}
       }
     }
   }
