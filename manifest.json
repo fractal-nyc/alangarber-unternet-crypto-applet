@@ -1,22 +1,26 @@
 {
-  "name": "My Applet",
-  "description": "Replace this with a description of what this applet does",
+  "name": "Crypto Info Applet",
+  "short_name": "Crypto Info",
+  "description": "Get real-time crypto prices for any token",
   "icons": [
     {
-      "src": "/icon-128x128.png"
+      "src": "icon-128x128.png"
     }
   ],
+  "entrypoint": "index.html",
   "actions": {
-    "set_name": {
-      "description": "Sets the name of the user.",
+    "get_price": {
+      "title": "Get Coin Price by CoinGecko ID",
+      "description": "Get the current USD price for a cryptocurrency using its CoinGecko ID. You must pass the exact ID used by CoinGecko, e.g., 'bitcoin', 'ethereum', 'solana', not symbols like 'BTC' or 'ETH'. Refer to https://api.coingecko.com/api/v3/coins/list for full list.",
       "params_schema": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string"
+          "id": {
+            "type": "string",
+            "description": "The CoinGecko ID of the cryptocurrency (e.g. 'bitcoin', 'ethereum')"
           }
         },
-        "required": ["name"]
+        "required": ["id"]
       }
     }
   }

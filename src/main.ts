@@ -2,15 +2,30 @@ import { applets } from '@web-applets/sdk';
 
 const self = applets.register();
 
-// Define a 'set_name' action, and make it update the shared data object with the new name
-self.setActionHandler('set_name', ({ name }) => {
-  self.data = { name };
+self.setActionHandler('get_price', async ({ id }) => {
+  try {
+    const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd`);
+    const json = await res.json();
+    const price = json[id]?.usd;
+
+    if (price !== undefined) {
+      self.data = { id, price };
+    } else {
+      self.data = { error: `No price found for ID "${id}".` };
+    }
+  } catch (err) {
+    self.data = { error: `Error fetching price: ${err}` };
+  }
 });
 
-// Whenever the data is updated, update the view
 self.ondata = () => {
-  const nameElement = document.getElementById('name');
-  if (nameElement) {
-    nameElement.innerText = self.data.name;
+  const display = document.getElementById('price-display');
+  if (!display) return;
+
+  const { id, price, error } = self.data;
+  if (error) {
+    display.textContent = error;
+  } else if (id && price !== undefined) {
+    display.textContent = `${id}: $${price}`;
   }
 };
